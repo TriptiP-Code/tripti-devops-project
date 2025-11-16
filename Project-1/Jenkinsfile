@@ -2,34 +2,35 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/TriptiP-Code/tripti-devops-project.git'
+                git url: 'https://github.com/TriptiP-Code/tripti-devops-project.git', branch: 'main'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh '''
-                    pip install -r requirements.txt
+                bat '''
+                echo Installing dependencies...
+                REM If needed, install requirements here
                 '''
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh '''
-                    docker build -t tripti-app .
+                bat '''
+                echo Building Docker image...
+                docker build -t tripti-app .
                 '''
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                sh '''
-                    docker run -d --name tripti-app-container -p 5000:5000 tripti-app || true
+                bat '''
+                echo Running Docker container...
+                docker run -d -p 8080:8080 --name tripti-container tripti-app
                 '''
             }
         }
@@ -37,7 +38,11 @@ pipeline {
 
     post {
         always {
-            sh 'docker ps -a'
+            bat '''
+            echo Cleaning workspace...
+            docker stop tripti-container || echo Container not running
+            docker rm tripti-container || echo Container not found
+            '''
         }
     }
 }
