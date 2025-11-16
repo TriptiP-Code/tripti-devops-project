@@ -35,14 +35,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            bat '''
-            echo Cleaning workspace...
-            docker stop tripti-container || echo Container not running
-            docker rm tripti-container || echo Container not found
-            '''
-        }
-    }
 }
