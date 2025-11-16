@@ -8,10 +8,10 @@ Hello, Tripti! Your DevOps pipeline is working!
 
 2. 🐳 Docker Setup
 The Dockerfile:
-Uses Python 3.10 slim
-Installs Flask from requirements.txt
-Exposes port 5000
-Runs the Flask app
+1.Uses Python 3.10 slim
+2.Installs Flask from requirements.txt
+3.Exposes port 5000
+4.Runs the Flask app
 
 Container 
 <img width="1891" height="921" alt="image" src="https://github.com/user-attachments/assets/f99b7f8d-efbf-4c19-aff8-7068b0af21dd" />
@@ -40,7 +40,7 @@ Inside (container): 8080
 
 Some Command issue in jenkins pipeline , as using personal desktop (OS : windows) to run jenkins ,there is no sh (Bash shell) available by default, so Jenkins gave an error like:
 'sh' is not recognized as an internal or external command
-I changed all sh steps to bat, like:
+therefore I changed all sh steps to bat, like:
 bat 'echo Building Docker image...'
 
 
